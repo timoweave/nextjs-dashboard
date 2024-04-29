@@ -10,7 +10,6 @@ import {
 } from '@ui/dashboard/nav-links';
 import Link from 'next/link';
 
-
 function Spacer() {
     return (
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block">

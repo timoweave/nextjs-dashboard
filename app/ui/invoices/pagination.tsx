@@ -26,7 +26,6 @@ export default function Pagination(props: PaginationProps) {
     };
 
     useEffect(() => {
-        console.log({ page: searchParams.get('page') });
         if (searchParams.get('page') == null) {
             route.replace(createPageURL(currentPage));
         }

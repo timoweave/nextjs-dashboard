@@ -1,7 +1,6 @@
 import { inter } from '@ui/fonts';
 import '@ui/global.css';
 
-
 export interface AppLayoutProps {
     children: React.ReactNode;
 }

@@ -2,11 +2,10 @@ import { fetchInvoicesPages } from '@lib/data';
 import { lusitana } from '@ui/fonts';
 import { CreateInvoice } from '@ui/invoices/buttons';
 import Pagination from '@ui/invoices/pagination';
-import Table from '@ui/invoices/table';
+import InvoiceTable from '@ui/invoices/table';
 import Search from '@ui/search';
 import { InvoicesTableSkeleton } from '@ui/skeletons';
 import { Suspense } from 'react';
-
 
 export interface InvoicesPageProps {
     searchParams?: {
@@ -34,7 +33,7 @@ export default async function InvoicesPage(props: InvoicesPageProps) {
                 key={`${query}/${currentPage}`}
                 fallback={<InvoicesTableSkeleton />}
             >
-                <Table query={query} currentPage={currentPage} />
+                <InvoiceTable query={query} currentPage={currentPage} />
             </Suspense>
             <div className="mt-5 flex w-full justify-center">
                 <Pagination totalPages={totalPages} />

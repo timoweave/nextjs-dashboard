@@ -2,7 +2,6 @@ import { fetchCustomers } from '@lib/data';
 import Breadcrumbs from '@ui/invoices/breadcrumbs';
 import CreateForm from '@ui/invoices/create-form';
 
-
 export default async function InvoiceCreatePage() {
     const customers = await fetchCustomers();
     const breadcrumbs = [

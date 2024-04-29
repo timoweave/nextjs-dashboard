@@ -4,7 +4,6 @@ import { lusitana } from '@ui/fonts';
 import Image from 'next/image';
 import Link from 'next/link';
 
-
 export default function AppPage() {
     return (
         <main className="flex min-h-screen flex-col p-6">

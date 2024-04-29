@@ -5,22 +5,48 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
-
 const InvoiceSchema = z.object({
     id: z.string(),
-    customerId: z.string(),
-    amount: z.coerce.number(),
-    status: z.enum(['pending', 'paid']),
+    customerId: z.string({
+        invalid_type_error: 'Please select a customer',
+        required_error: 'Please select a customer',
+    }),
+    amount: z.coerce
+        .number()
+        .gt(0, { message: 'Please enter an amount greater than 0' }),
+    status: z.enum(['pending', 'paid'], {
+        invalid_type_error: 'Please select an invoice status',
+        required_error: 'Please select an invoice status',
+    }),
     date: z.string(),
 });
 
 const CreateInvoiceSchema = InvoiceSchema.omit({ id: true, date: true });
 
-export async function createInvoice(formData: FormData) {
+export interface CreateInvoicePrevState {
+    message?: string | null;
+    errors?: {
+        customerId?: string[];
+        amount?: string[];
+        status?: string[];
+    };
+}
+
+export async function createInvoice(
+    prevState: CreateInvoicePrevState,
+    formData: FormData,
+) {
     const rawFormData = Object.fromEntries(formData.entries());
-    const validatedFormData = CreateInvoiceSchema.parse(rawFormData);
-    const { customerId, status } = validatedFormData;
-    const amountInCents = validatedFormData.amount * 100;
+    const validatedFormData = CreateInvoiceSchema.safeParse(rawFormData);
+    if (!validatedFormData.success) {
+        return {
+            messsage: 'Missing Fields. Failed to creae invoice.',
+            errors: validatedFormData.error.flatten().fieldErrors,
+        };
+    }
+
+    const { customerId, status } = validatedFormData.data;
+    const amountInCents = validatedFormData.data.amount * 100;
     const [date] = new Date().toISOString().split('T');
 
     try {
@@ -68,12 +94,11 @@ export async function deleteInvoice(invoiceId: string, formData: FormData) {
 					DELETE FROM invoices
 					WHERE id = ${invoiceId}
 				`;
-				revalidatePath('/dashboard/invoices');
+        revalidatePath('/dashboard/invoices');
         return { message: `Delete Invoice id ${invoiceId}.` };
     } catch (error) {
         return {
             message: `Database Error: Failed to Delete Invoice id ${invoiceId}.`,
         };
     }
-
 }

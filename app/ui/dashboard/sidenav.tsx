@@ -1,26 +1,32 @@
 'use client';
 
+// import { logoutAction, signOut } from '@/auth';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import AcmeLogo from '@ui/acme-logo';
-import {
-    NavLink,
-    customers,
-    dashboard,
-    invoices,
-} from '@ui/dashboard/nav-links';
+import { NavLink, customers, dashboard, invoices } from '@ui/dashboard/nav-links';
 import Link from 'next/link';
+
 
 function Spacer() {
     return (
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block">
-            {/* */}
+            {/* space */}
         </div>
     );
 }
 
 function Logout() {
     return (
-        <form>
+        <form
+            // action={
+                // logoutAction
+                // signOut
+                // async function logoutAction() {
+                //     'use server';
+                //     await signOut();
+                // }
+            // }
+        >
             <button
                 onClick={() => {
                     console.log('logout');

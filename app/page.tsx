@@ -1,8 +1,13 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import AcmeLogo from '@ui/acme-logo';
 import { lusitana } from '@ui/fonts';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'Welcome',
+};
 
 export default function AppPage() {
     return (

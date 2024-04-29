@@ -5,7 +5,12 @@ import Pagination from '@ui/invoices/pagination';
 import InvoiceTable from '@ui/invoices/table';
 import Search from '@ui/search';
 import { InvoicesTableSkeleton } from '@ui/skeletons';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
+
+export const metadata: Metadata = {
+    title: 'Invoice',
+};
 
 export interface InvoicesPageProps {
     searchParams?: {

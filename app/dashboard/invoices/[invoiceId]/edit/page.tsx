@@ -1,7 +1,12 @@
 import { fetchCustomers, fetchInvoiceById } from '@lib/data';
 import Breadcrumbs from '@ui/invoices/breadcrumbs';
 import EditInvoiceForm from '@ui/invoices/edit-form';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+
+export const metadata: Metadata = {
+    title: 'Edit Invoice',
+};
 
 export interface InvoiceEditPageProps {
     params: {

@@ -1,19 +1,15 @@
 import { fetchLatestInvoices, fetchRevenue } from '@lib/data';
-import Cards, {
-    PendingCards,
-    TotalCustomersCard,
-    TotalInvoicesCards,
-    TotalPaidInvoicesCard,
-} from '@ui/dashboard/cards';
+import Cards, { PendingCards, TotalCustomersCard, TotalInvoicesCards, TotalPaidInvoicesCard } from '@ui/dashboard/cards';
 import LatestInvoices from '@ui/dashboard/latest-invoices';
 import RevenueChart from '@ui/dashboard/revenue-chart';
 import { lusitana } from '@ui/fonts';
-import {
-    CardSkeleton,
-    LatestInvoicesSkeleton,
-    RevenueChartSkeleton,
-} from '@ui/skeletons';
+import { CardSkeleton, LatestInvoicesSkeleton, RevenueChartSkeleton } from '@ui/skeletons';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
+
+export const metadata: Metadata = {
+    title: 'Dashboard',
+};
 
 export interface DashboardPageProps {
     // TBD

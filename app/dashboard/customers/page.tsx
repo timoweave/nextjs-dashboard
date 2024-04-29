@@ -1,11 +1,11 @@
-export interface CustomersProps {
+export interface CustomersPageProps {
     // TBD
 }
 
-export default function Customers(props: CustomersProps) {
+export default function CustomersPage(props: CustomersPageProps) {
     return (
         <div>
-            <div>customers...{/* TBD */}</div>
+            <div>customers page...{/* TBD */}</div>
         </div>
     );
 }

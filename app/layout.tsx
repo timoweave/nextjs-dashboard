@@ -1,11 +1,12 @@
 import { inter } from '@ui/fonts';
 import '@ui/global.css';
 
-export interface RootLayoutProps {
+
+export interface AppLayoutProps {
     children: React.ReactNode;
 }
 
-export default function RootLayout(props: RootLayoutProps) {
+export default function AppLayout(props: AppLayoutProps) {
     const { children } = props;
     return (
         <html lang="en">

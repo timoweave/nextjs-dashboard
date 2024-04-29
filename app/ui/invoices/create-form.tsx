@@ -1,5 +1,4 @@
-import { CustomerField } from '@/app/lib/definitions';
-import { Button } from '@/app/ui/button';
+import { CancelForm, SubmitForm } from './utils';
 import {
     CheckIcon,
     ClockIcon,
@@ -7,9 +6,9 @@ import {
     UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { createInvoice } from '@lib/actions';
-import Link from 'next/link';
+import { CustomerField } from '@lib/definitions';
 
-export function CustomerName(props: FormProps) {
+export function InvoiceCustomerNameSelect(props: CreateFormProps) {
     const { customers } = props;
 
     return (
@@ -42,7 +41,7 @@ export function CustomerName(props: FormProps) {
     );
 }
 
-export function InvoiceAmount() {
+export function InvoiceAmountNumber() {
     return (
         <div className="mb-4">
             <label htmlFor="amount" className="mb-2 block text-sm font-medium">
@@ -65,7 +64,7 @@ export function InvoiceAmount() {
     );
 }
 
-export function InvoiceStatus() {
+export function InvoiceStatusRadio() {
     return (
         <fieldset>
             <legend className="mb-2 block text-sm font-medium">
@@ -108,27 +107,23 @@ export function InvoiceStatus() {
         </fieldset>
     );
 }
-export interface FormProps {
+
+export interface CreateFormProps {
     customers: CustomerField[];
 }
 
-export default function CreateForm(props: FormProps) {
+export default function CreateForm(props: CreateFormProps) {
     const { customers } = props;
     return (
         <form action={createInvoice}>
             <div className="rounded-md bg-gray-50 p-4 md:p-6">
-                <CustomerName customers={customers} />
-                <InvoiceAmount />
-                <InvoiceStatus />
+                <InvoiceCustomerNameSelect customers={customers} />
+                <InvoiceAmountNumber />
+                <InvoiceStatusRadio />
             </div>
             <div className="mt-6 flex justify-end gap-4">
-                <Link
-                    href="/dashboard/invoices"
-                    className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-                >
-                    Cancel
-                </Link>
-                <Button type="submit">Create Invoice</Button>
+                <CancelForm />
+                <SubmitForm label="Create Invoice" />
             </div>
         </form>
     );

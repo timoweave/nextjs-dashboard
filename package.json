@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "lint": "next lint",
     "seed": "node -r dotenv/config ./scripts/seed.js",
     "build": "next build",
     "dev": "next dev",

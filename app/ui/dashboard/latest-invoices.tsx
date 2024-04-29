@@ -1,10 +1,9 @@
-import { LatestInvoice } from '@/app/lib/definitions';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import { fetchLatestInvoices } from '@lib/data';
+import { LatestInvoice } from '@lib/definitions';
 import { lusitana } from '@ui/fonts';
 import clsx from 'clsx';
 import Image from 'next/image';
-
 
 export interface LatestInvoicesProps {
     // latestInvoices: LatestInvoice[];
@@ -12,7 +11,7 @@ export interface LatestInvoicesProps {
 
 export default async function LatestInvoices(_props: LatestInvoicesProps) {
     // const { latestInvoices } = props;
-		const latestInvoices = await fetchLatestInvoices();
+    const latestInvoices = await fetchLatestInvoices();
 
     return (
         <div className="flex w-full flex-col md:col-span-4">

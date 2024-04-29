@@ -1,14 +1,15 @@
 'use client';
 
-import AcmeLogo from '@/app/ui/acme-logo';
+import { PowerIcon } from '@heroicons/react/24/outline';
+import AcmeLogo from '@ui/acme-logo';
 import {
     NavLink,
     customers,
     dashboard,
     invoices,
-} from '@/app/ui/dashboard/nav-links';
-import { PowerIcon } from '@heroicons/react/24/outline';
+} from '@ui/dashboard/nav-links';
 import Link from 'next/link';
+
 
 function Spacer() {
     return (

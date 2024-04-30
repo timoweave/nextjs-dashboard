@@ -1,19 +1,11 @@
 'use client';
 
-import {
-    DocumentDuplicateIcon,
-    HomeIcon,
-    UserGroupIcon,
-} from '@heroicons/react/24/outline';
+import { DocumentDuplicateIcon, HomeIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-    ForwardRefExoticComponent,
-    RefAttributes,
-    SVGProps,
-    useMemo,
-} from 'react';
+import { ForwardRefExoticComponent, RefAttributes, SVGProps, useMemo } from 'react';
+
 
 export interface LinkData {
     name: string;
@@ -35,12 +27,16 @@ export function useNavLinkSelectedClassName(props: NavLinkProps): string {
     const { href } = link;
 
     const pathname = usePathname();
-    const isSelected = useMemo(() => pathname === href, [pathname, href]);
+    const isSelected = useMemo(
+        () => pathname === href.replace(/\?.*/, ''),
+        [pathname, href],
+    );
+
     const className = useMemo<string>(
         () =>
             clsx(
                 'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
-                isSelected && 'bg-sky-100 text-blue-600',
+                { 'bg-sky-100 text-blue-600': isSelected },
             ),
         [isSelected],
     );
@@ -75,7 +71,7 @@ export const invoices: LinkData = {
 
 export const customers = {
     name: 'Customers',
-    href: '/dashboard/customers',
+    href: '/dashboard/customers?page=1',
     icon: UserGroupIcon,
 };
 

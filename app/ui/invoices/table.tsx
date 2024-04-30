@@ -4,14 +4,24 @@ import { DeleteInvoice, UpdateInvoice } from '@ui/invoices/buttons';
 import InvoiceStatus from '@ui/invoices/status';
 import Image from 'next/image';
 
-export interface TableProps {
+
+export interface InvoicesTableProps {
     query: string;
     currentPage: number;
 }
 
-export default async function Table(props: TableProps) {
+function InvoiceTableHeader({ label }: { label: string }) {
+    return (
+        <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+            {label}
+        </th>
+    );
+}
+
+export default async function InvoicesTable(props: InvoicesTableProps) {
     const { query, currentPage = 1 } = props;
     const invoices = await fetchFilteredInvoices(query, currentPage);
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     return (
         <div className="mt-6 flow-root">
@@ -59,42 +69,12 @@ export default async function Table(props: TableProps) {
                     <table className="hidden min-w-full text-gray-900 md:table">
                         <thead className="rounded-lg text-left text-sm font-normal">
                             <tr>
-                                <th
-                                    scope="col"
-                                    className="px-4 py-5 font-medium sm:pl-6"
-                                >
-                                    Customer
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-3 py-5 font-medium"
-                                >
-                                    Email
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-3 py-5 font-medium"
-                                >
-                                    Amount
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-3 py-5 font-medium"
-                                >
-                                    Date
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-3 py-5 font-medium"
-                                >
-                                    Status
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="relative py-3 pl-6 pr-3"
-                                >
-                                    <span className="sr-only">Edit</span>
-                                </th>
+                                <InvoiceTableHeader label="Customer" />
+                                <InvoiceTableHeader label="Email" />
+                                <InvoiceTableHeader label="Amount" />
+                                <InvoiceTableHeader label="Date" />
+                                <InvoiceTableHeader label="Status" />
+                                <InvoiceTableHeader label="Edit" />
                             </tr>
                         </thead>
                         <tbody className="bg-white">

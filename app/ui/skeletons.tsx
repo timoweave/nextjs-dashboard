@@ -1,3 +1,6 @@
+import { PaginationArrow, PaginationNumber } from './invoices/pagination';
+import { generatePagination } from '@lib/utils';
+
 // Loading animation
 const shimmer =
     'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
@@ -177,26 +180,26 @@ export function CustomerTableRowSkeleton() {
     return (
         <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
             {/* Customer Name and Image */}
-            <td className="relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3">
+            <td className="relative overflow-hidden whitespace-nowrap py-5 pl-6 pr-5 text-sm">
                 <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-full bg-gray-100"></div>
+                    <div className="h-7 w-7 rounded-full bg-gray-100"></div>
                     <div className="h-6 w-24 rounded bg-gray-100"></div>
                 </div>
             </td>
             {/* Email */}
-            <td className="whitespace-nowrap px-3 py-3">
+            <td className="whitespace-nowrap px-4 py-5">
                 <div className="h-6 w-32 rounded bg-gray-100"></div>
             </td>
             {/* Amount */}
-            <td className="whitespace-nowrap px-3 py-3">
+            <td className="whitespace-nowrap px-4 py-5">
                 <div className="h-6 w-16 rounded bg-gray-100"></div>
             </td>
             {/* Date */}
-            <td className="whitespace-nowrap px-3 py-3">
+            <td className="whitespace-nowrap px-4 py-5">
                 <div className="h-6 w-16 rounded bg-gray-100"></div>
             </td>
             {/* Status */}
-            <td className="whitespace-nowrap px-3 py-3">
+            <td className="whitespace-nowrap px-4 py-5">
                 <div className="h-6 w-16 rounded bg-gray-100"></div>
             </td>
         </tr>
@@ -280,7 +283,7 @@ export function CustomersTableRowSkeleton() {
 
 function CustomersTableTableHeader({ label }: { label: string }) {
     return (
-        <th scope="col" className="px-3 py-5 font-medium">
+        <th scope="col" className="px-3 py-5 pl-6 pr-2 font-medium">
             {label}
         </th>
     );
@@ -314,10 +317,52 @@ export function CustomersTableSkeleton() {
                             <CustomerTableRowSkeleton />
                             <CustomerTableRowSkeleton />
                             <CustomerTableRowSkeleton />
+                            <CustomerTableRowSkeleton />
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+    );
+}
+
+export function PaginationSkeleton() {
+    const currentPage = 1;
+    const allPages = generatePagination(currentPage, 5);
+
+    return (
+        <>
+            <div className="inline-flex">
+                <PaginationArrow direction="left" href="" isDisabled />
+
+                <div className="flex -space-x-px">
+                    {allPages.map((page, index) => {
+                        let position:
+                            | 'first'
+                            | 'last'
+                            | 'single'
+                            | 'middle'
+                            | undefined;
+
+                        if (index === 0) position = 'first';
+                        if (index === allPages.length - 1) position = 'last';
+                        if (allPages.length === 1) position = 'single';
+                        if (page === '...') position = 'middle';
+
+                        return (
+                            <PaginationNumber
+                                key={page}
+                                href=""
+                                page={page}
+                                position={position}
+                                isActive={currentPage === page}
+                            />
+                        );
+                    })}
+                </div>
+
+                <PaginationArrow direction="right" href="" isDisabled />
+            </div>
+        </>
     );
 }

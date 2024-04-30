@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
+
 export interface PaginationProps {
     totalPages: number;
 }
@@ -84,7 +85,7 @@ export interface PaginationNumberProps {
     isActive: boolean;
 }
 
-function PaginationNumber(props: PaginationNumberProps) {
+export function PaginationNumber(props: PaginationNumberProps) {
     const { page, href, isActive, position } = props;
     const className = clsx(
         'flex h-10 w-10 items-center justify-center text-sm border',
@@ -112,7 +113,7 @@ export interface PaginationArrowProps {
     isDisabled?: boolean;
 }
 
-function PaginationArrow(props: PaginationArrowProps) {
+export function PaginationArrow(props: PaginationArrowProps) {
     const { href, direction, isDisabled } = props;
     const className = clsx(
         'flex h-10 w-10 items-center justify-center rounded-md border',

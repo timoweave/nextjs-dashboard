@@ -3,7 +3,7 @@ import CustomersTable from '@ui/customers/table';
 import { lusitana } from '@ui/fonts';
 import Pagination from '@ui/invoices/pagination';
 import Search from '@ui/search';
-import { CustomersTableSkeleton } from '@ui/skeletons';
+import { CustomersTableSkeleton, PaginationSkeleton } from '@ui/skeletons';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
@@ -41,8 +41,11 @@ export default async function CustomersPage(props: CustomersPageProps) {
             >
                 <CustomersTable customers={customers} />
             </Suspense>
+
             <div className="mt-5 flex w-full justify-center">
-                <Pagination totalPages={totalPages} />
+                <Suspense fallback={<PaginationSkeleton />}>
+                    <Pagination totalPages={totalPages} />
+                </Suspense>
             </div>
         </div>
     );
